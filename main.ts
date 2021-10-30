@@ -20,7 +20,7 @@ async function ddd(query: string): Promise<Response> {
   if (dogDetails.isYes) {
     return new Response(`Sorry... ${dogDetails.topic.name} in ${details.item.name} (${details.item.releaseYear}).`)
   } else {
-    return new Response(`Phew... ${dogDetails.topic.name} in ${details.item.name} (${details.item.releaseYear}).`)
+    return new Response(`Phew... ${dogDetails.topic.notName} in ${details.item.name} (${details.item.releaseYear}).`)
   }
 }
 
