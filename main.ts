@@ -17,12 +17,18 @@ async function ddd(query: string): Promise<Response> {
   if (!dogDetails)
     return new Response(`DDD had no dog-related info for ${videogameResult.name} {id=${videogameResult.id}}`)
   
-  if (dogDetails.yesSum > dogDetails.noSum + 1) {
-    return new Response(`Sorry... ${dogDetails.topic.name} in ${details.item.name} (${details.item.releaseYear}).`)
-  } else if (dogDetails.noSum > dogDetails.yesSum + 1) {
-    return new Response(`Phew... ${dogDetails.topic.notName} in ${details.item.name} (${details.item.releaseYear}).`)
+  let gameTitle = details.item.name;
+  if (!details.item.releaseYear.toLowerCase().startsWith("unknown")) {
+    gameTitle = gameTitle + ` (${details.item.releaseYear})`
+  }
+  let score = `${dogDetails.yesSum}yes ${dogDetails.noSum}no`;
+  
+  if (dogDetails.yesSum > dogDetails.noSum) {
+    return new Response(`Sorry... ${dogDetails.topic.name} in ${gameTitle}. ${score}`)
+  } else if (dogDetails.noSum > dogDetails.yesSum) {
+    return new Response(`Phew... ${dogDetails.topic.notName} in ${gameTitle}. ${score}`)
   } else {
-    return new Response(`Consensus is divided on whether ${dogDetails.topic.name} in ${details.item.name} (${details.item.releaseYear}).`)
+    return new Response(`Consensus is divided ${score} on whether ${dogDetails.topic.name} in ${gameTitle}.`)
   }
 }
 
