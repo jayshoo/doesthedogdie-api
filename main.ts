@@ -17,10 +17,12 @@ async function ddd(query: string): Promise<Response> {
   if (!dogDetails)
     return new Response(`DDD had no dog-related info for ${videogameResult.name} {id=${videogameResult.id}}`)
   
-  if (dogDetails.isYes) {
+  if (dogDetails.yesSum > dogDetails.noSum + 1) {
     return new Response(`Sorry... ${dogDetails.topic.name} in ${details.item.name} (${details.item.releaseYear}).`)
-  } else {
+  } else if (dogDetails.noSum > dogDetails.yesSum + 1) {
     return new Response(`Phew... ${dogDetails.topic.notName} in ${details.item.name} (${details.item.releaseYear}).`)
+  } else {
+    return new Response(`Consensus is divided on whether ${dogDetails.topic.name} in ${details.item.name} (${details.item.releaseYear}).`)
   }
 }
 
