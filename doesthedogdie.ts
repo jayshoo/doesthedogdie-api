@@ -11,6 +11,7 @@ interface Media {
 }
 
 interface Topic {
+  id: number
   /** @example a plane crashes */
   name: string
   /** @example no plane crashes */
@@ -30,7 +31,7 @@ interface Topic {
 
 interface TopicItem {
   topic: Topic
-  isYes: number
+  // isYes: number - removed sometime before 2023-01-31
   yesSum: number
   noSum: number
   comment?: string // Someone can get shot in the head through the eye. Guns are used to shoot at monsters.
